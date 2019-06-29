@@ -1,9 +1,0 @@
-[package]
-name = "protocol-benchmark"
-version = "0.1.0"
-authors = ["Justin LeFebvre <jstnlefebvre@gmail.com>"]
-edition = "2018"
-
-[dependencies]
-pnet = "0.22"
-rand = "0.6"
