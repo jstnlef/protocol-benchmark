@@ -18,10 +18,6 @@ Configurable settings:
 Initially, the tests will place some focus on a fast-paced multiplayer game scenario. e.g. FPS games, realtime 
 simulations, etc.
 
-Specifically:
-* 60 hertz send/receive rate
-* Payloads of various sizes: less than or greater than MTU (~1500 bytes)
-
 Last thing to note, I'm going to use Rust's default UDP/TCP implementation for those benchmarks. 
 
 ## Protocols to test
@@ -35,4 +31,30 @@ Last thing to note, I'm going to use Rust's default UDP/TCP implementation for t
 
 ## Methodology
 Each protocol implementation is going to run in a docker container configured using linux's built in
-`Traffic Control` (tc) command to simulate unfavorable network conditions.
+`Traffic Control` (tc) command to simulate unfavorable network conditions. Each test will take place within a single
+process (multiple threads). The messages themselves will be serialized as JSON to allow for easy inspection. In reality,
+you would probably want to use something quite a bit more compact.
+
+The follow conditions will be tested using eth0 network interface:
+* 60 hertz send/receive rate
+
+### Loss
+* Pristine
+* 10% packet loss
+* 25% packet loss
+* 50% packet loss
+
+### Latency
+* 10ms
+* 50ms
+* 200ms
+
+### Jitter
+* 0ms
+* 10ms
+* 50ms
+
+### Packet Size
+* Less than MTU (~1500 bytes)
+* Greater than MTU
+
