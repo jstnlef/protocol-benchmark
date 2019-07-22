@@ -11,9 +11,8 @@ use std::{
 };
 
 fn main() -> Result<(), io::Error> {
-    let addr = get_eth_addr()?;
-    println!("Binding to address: {:?}", addr);
-    let client_addr: SocketAddr = (addr.clone(), 9000).into();
-    let server_addr: SocketAddr = (addr, 9900).into();
+    let server_addr = "127.0.0.1:9000".parse().unwrap();
+    println!("Binding to address: {:?}", server_addr);
+    let client_addr = "udp://client:9000".parse().unwrap();
     Ok(start(server_addr, client_addr))
 }

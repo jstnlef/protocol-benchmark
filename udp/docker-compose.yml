@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  client:
+    build:
+      context: .
+      dockerfile: docker/client/Dockerfile
+    ports:
+      - "9000:9000"
+  server:
+    build:
+      context: .
+      dockerfile: docker/server/Dockerfile
+    ports:
+      - "9100:9000"
+
+# TODO: Add the proxy here
+#  proxy:
+
